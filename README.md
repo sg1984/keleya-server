@@ -16,6 +16,7 @@ To run the system:
 * `yarn`
 * `npm start` 
 * If you are religious, pray. If not, send some positive energy.
+* After it is running, to play around a little bit, you can reach to `<INSERT_LOCAL_SERVER_ADDRESS_HERE>/api-docs` to play with the Swagger endpoints.
 
 If you see any problem, please reach out so I can fix it ASAP.
 
