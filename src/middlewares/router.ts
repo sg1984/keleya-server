@@ -1,7 +1,7 @@
 import * as express from 'express';
 import {singUp, update, logIn} from '../controllers/user-controller';
 import swaggerUi from 'swagger-ui-express';
-const swaggerDocument = require ('../../swagger.json');
+import * as  swaggerDocument from './swagger.json';
 
 const router = express.Router();
 
