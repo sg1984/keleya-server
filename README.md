@@ -12,6 +12,7 @@ Also, there is a file called `.env.example` with the configuration data for your
 
 To run the system:
 - 
+* `mv .env.example .env`
 * `yarn`
 * `npm start` 
 * If you are religious, pray. If not, send some positive energy.
