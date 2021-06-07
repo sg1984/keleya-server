@@ -1,0 +1,16 @@
+const env = process.env.NODE_ENV || 'development';
+
+type Config = {
+  serverUrl: string
+  serverPort: number
+  databaseHost: string,
+  databaseUser: string,
+  databasePwd: string,
+  databaseName: string,
+  databaseDialect: string,
+  jwtSecret: string
+};
+
+const config: Config = require(`./${env}`).default;
+
+export default config;

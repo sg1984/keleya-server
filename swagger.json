@@ -1,0 +1,181 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Keleya API",
+        "description": "Keleya API for the challenge.",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "ApiKeyAuth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "Authorization"
+            }
+        }
+    },
+    "paths": {
+        "/api/users": {
+            "post": {
+                "summary": "Creates an user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "description": "User email."
+                                    },
+                                    "password": {
+                                        "type": "password",
+                                        "description": "User password."
+                                    }
+                                },
+                                "required": [
+                                    "email",
+                                    "password"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created. Returns a secure authentication token.",
+                        "schema": {
+                            "$ref": "#/definitions/token"
+                        }
+                    },
+                    "400": {
+                        "description": "Required fields missing!"
+                    },
+                    "422": {
+                        "description": "Email already registered."
+                    },
+                    "500": {
+                        "description": "Server error, this should not happen... but the weather today..."
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update an user data. One of the optional fields must be present",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "User name."
+                                    },
+                                    "baby_birth_date": {
+                                        "type": "string",
+                                        "description": "Baby birth date. "
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A secure authentication token.",
+                        "schema": {
+                            "$ref": "#/definitions/token"
+                        }
+                    },
+                    "400": {
+                        "description": "Required fields missing!"
+                    },
+                    "401": {
+                        "description": "Token expired."
+                    },
+                    "403": {
+                        "description": "Token invalid"
+                    },
+                    "500": {
+                        "description": "Server error, this should not happen, but the weather..."
+                    }
+                }
+            }
+        },
+        "/api/users/auth": {
+            "post": {
+                "summary": "Login an user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "description": "User email."
+                                    },
+                                    "password": {
+                                        "type": "password",
+                                        "description": "User password."
+                                    }
+                                },
+                                "required": [
+                                    "email",
+                                    "password"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A secure authentication token.",
+                        "schema": {
+                            "$ref": "#/definitions/token"
+                        }
+                    },
+                    "400": {
+                        "description": "Required fields missing!"
+                    },
+                    "422": {
+                        "description": "Email or password invalid."
+                    },
+                    "500": {
+                        "description": "Server error, this should not happen, but the weather..."
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "token": {
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
